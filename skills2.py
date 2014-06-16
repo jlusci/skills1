@@ -1,3 +1,5 @@
+import operator
+
 string1 = "I do not like green eggs and ham."
 list1 = [2, 5, 12, 6, 1, -5, 8, 5, 6, -2, 2, 27]
 list2 = [-5, 6, 4, 8, 15, 16, 23, 42, 2, 7]
@@ -26,24 +28,51 @@ return a list of all common items shared between both lists
 """
 def common_items(list1, list2):
 	common_list=[]
-	# for word in list1:
-	# 	if word in list2:
-	# 		common_list.append(word)
+	# # for word in list1:
+	# # 	if word in list2:
+	# # 		common_list.append(word)
 
-	# return common_list
+	# # return common_list
 	i = 0
 	j = 0
+
 	while i < len(list1):
 		while j < len(list2):
 			if list2[j] == list1[i]:
-				common_list.append(list2[j])	
-				# print common_list
+				common_list.append(list2[j])
 			j += 1	
-		# print list1[i]
+		
 		j = 0
 		i += 1
 
-	return common_list
+	new_list = list(set(common_list))
+
+	return new_list
+	# common_list = []
+	# i = 0
+	# j = 0
+	# k = 0
+	# count = 0
+	# while i < len(list1):
+	# 	while j < len(list2):
+	# 		if list2[j] == list1[i]:
+	# 			while k < len(common_list):
+	# 				if list2[j] == common_list[k]:
+	# 					count += 1
+	# 					k += 1
+	#                 else:
+	#                     k += 1
+	#         if count == 0:
+	#         	common_list.append(list2[j])
+	#         else:
+	#         	count = 0		
+	# 		k = 0
+	#         j += 1	
+	#     k = 0
+	#     j = 0
+	# 	i += 1
+
+	# return common_list 
 
 """
 Given two lists, (without using the keyword 'in' or the method 'index')
@@ -67,22 +96,24 @@ def common_items2(list1, list2):
 	# 	else:
 	# 		my_dict[word] = 1
 
-	#doesn't work!
-	# i = 0
-	# j = 0
-	# while i < len(list1):
-	# 	while j < len(list2):
-	# 		my_dict[list2[j]] += 1
-	# 		j += 1
-	# 	j = 0
-	# 	i += 1
+	# use while loops to do the same thing. doens't work.
+	i = 0
+	j = 0
+	while i < len(list1):
+		while j < len(list2):
+			if list1[i] == list2[j]:
+				key = list2[j]
+				my_dict[key] = my_dict.get(key,0) + 1
+			j += 1
+		j = 0
+		i += 1
 
-	# for word in my_dict:
-	# 	if my_dict[word] >= 2:
-	# 		my_list.append(word)
+	for word in my_dict:
+		if my_dict[word] >= 1:
+			my_list.append(word)
 
-	return my_list			
-
+	# return my_list			
+	return my_dict
 
 """
 Given a list of numbers, return list of number pairs that sum to zero
@@ -105,7 +136,17 @@ def sum_zero(list1):
 Given a list of words, return a list of words with duplicates removed
 """
 def find_duplicates(words):
-    pass
+	my_dict = {}
+	my_list = []
+	for word in words:
+		my_dict[word] = my_dict.get(word,0) + 1
+		value = my_dict[word]
+
+	for key in my_dict:
+		if my_dict[key] == 1:
+			my_list.append(key)
+
+	return my_list
 
 """
 Given a list of words, print the words in ascending order of length
@@ -113,7 +154,12 @@ Bonus: do it on a file instead of the list provided
 Bonus: print the words in alphabetical order in ascending order of length
 """
 def word_length(words):
-    pass
+    my_dict = {}
+    for index in range(len(words)):
+    	value = len(words[index])
+    	my_dict[words[index]] = value
+    	sorted_list = sorted(my_dict, key = my_dict.get)
+    return sorted_list
 
 """
 Here's a table of English to Pirate translations
@@ -153,10 +199,19 @@ def main():
 	# common_list = common_items(list1,list2)
 	# print common_list
 
-	my_list = common_items2(list1,list2)
-	print my_list
+	# my_list = common_items(list1,list2)
+	# print my_list
 
-	my_list = sum_zero(list1)
+	# my_dict = common_items2(list1,list2)
+	# print my_dict
+
+	# my_list = sum_zero(list1)
+	# print my_list
+
+	# my_dict = find_duplicates(words)
+	# print my_dict
+
+	my_list = word_length(words)
 	print my_list
 
 if __name__ == '__main__':
