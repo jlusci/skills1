@@ -17,10 +17,6 @@ def count_unique(string1):
 	my_list = string1.split()
 	for word in my_list:
 		my_dict[word] = my_dict.get(word,0) + 1
-		# if word in my_dict:
-		# 	my_dict[word] += 1
-		# else:
-		# 	my_dict[word] = 1
 	return my_dict
 
 """
@@ -55,20 +51,6 @@ def common_items(list1, list2):
 	new_list = list(set(common_list))
 
 	return new_list
-	#**************************************************
-	# now try to use dictionaries
-	# my_dict = {}
-
-	# for item in list1:
-	# 	my_dict[item] = my_dict.get(item,0) + 1
-	# for item in list2:
-	# 	my_dict[item] = my_dict.get(item,0) + 1
-
-	# for item in my_dict:
-	# 	if my_dict[item] > 1:
-	# 		common_list.append(item)
-	
-	# return common_list
 
 """
 3 - Given two lists, (without using the keyword 'in' or the method 'index')
@@ -79,14 +61,19 @@ def common_items2(list1, list2):
 	my_dict = {}
 	my_list = []
 
-	for item in list1:
-		if my_dict.get(item,0) == 0:
-			my_dict[item] = my_dict.get(item,0) + 1
+#**********************************************
+#Use dictionaries with counters 
+#**********************************************
+	# for item in list1:
+	# 	if my_dict.get(item,0) == 0:
+	# 		my_dict[item] = my_dict.get(item,0) + 1
 
-	for item in list2:
-		my_dict[item] = my_dict.get(item,0) + 1
+	# for item in list2:
+	# 	my_dict[item] = my_dict.get(item,0) + 1
 
-	# use while loops instead to avoid using "in"
+#*****************************************************
+#Use dictionaries with while loops to avoid using 'in'
+#*****************************************************
 	# i = 0
 	# j = 0
 	# while i < len(list1):
@@ -98,9 +85,19 @@ def common_items2(list1, list2):
 	# 	j = 0
 	# 	i += 1
 
-	for key in my_dict:
-		if my_dict[key] > 1:
-			my_list.append(key)
+	# for key in my_dict:
+	# 	if my_dict[key] > 1:
+	# 		my_list.append(key)
+#***************************************************
+#Now try without a counter - 'in' is okay in for loop
+#***************************************************
+	for item in list1:
+		my_dict[item] = True
+
+	for item in list2:
+		if my_dict.get(item) == True:
+			my_list.append(item)
+
 
 	return my_list
 
@@ -195,10 +192,6 @@ def pirate_trans(text):
 			outtext.append(word)
 
 	print " ".join(outtext)
-
-
-
-
 
 
 def main():
